@@ -41,7 +41,7 @@ num_end = page_end * 25
 num = 0
 page_num = 1
 while num <= num_end:
-    html2 = gethtml('http://www.douban.com/group/h' + group_name + '/discussion?start=%d' % num)
+    html2 = gethtml('http://www.douban.com/group/' + group_name + '/discussion?start=%d' % num)
     topiclist = gettopic(html2)
     # 限制下载的图片数
     for topicurl in topiclist:
