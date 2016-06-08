@@ -1,6 +1,7 @@
 import urllib.request
 import re
 import time
+from bs4 import BeautifulSoup
 
 
 def gethtml(url):
@@ -19,17 +20,18 @@ def gettopic(html):
 
 
 def download(html):
-    reg = r'https://img3.doubanio.com/view/group_topic/large/public/.+\.jpg'
-    imglist = re.findall(reg, html)
+    soup = BeautifulSoup(html, 'lxml')
     i = 1
     download_img = None
-    for imgurl in imglist:
-        img_numlist = re.findall(r'p\d{8}', imgurl)
+    for k in soup.find_all('div', {'class': 'topic-figure cc'}):
+        url = k.img.get('src')
+        img_numlist = re.findall(r'p\d{8}', url)
         for img_num in img_numlist:
-            download_img = urllib.request.urlretrieve(imgurl, 'G:\python\download\%s.jpg' % img_num)
-            time.sleep(1.51)
+            download_img = urllib.request.urlretrieve(url, '../douban_spider/download/%s.jpg' % img_num)
+            time.sleep(2)
             i += 1
-            print(imgurl)
+            print(url)
+
     return download_img
 
 
