@@ -4,6 +4,7 @@ import time
 from bs4 import BeautifulSoup
 
 
+
 def gethtml(url):
     header = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
@@ -51,4 +52,4 @@ while num <= num_end:
         page_num += 1
 
 else:
-    print('采集完成！')
+    print('下载完成！')
